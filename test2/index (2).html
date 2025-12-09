@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Happy New Year</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"> 
+
+        <style>
+            /* 1. Праздничный фон: темно-синий переходит в темно-зеленый */
+            body {
+                background: linear-gradient(180deg, #0b1c2c 0%, #113028 100%);
+                min-height: 100vh;
+                color: white;
+                overflow-x: hidden; /* Чтобы шары не расширяли экран */
+            }
+
+            /* 2. Заголовок стандартным красивым шрифтом */
+            h1 {
+                font-family: "Brush Script MT", "Comic Sans MS", cursive;
+                color: #ffc107; /* Золотой цвет Bootstrap */
+                text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+                margin-top: 50px;
+                margin-bottom: 20px;
+                font-size: 3.5rem; /* Крупнее для стиля */
+            }
+            
+            /* Контейнер двери (твой код) */
+            .door-container { 
+                width: 100%; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+
+            .door-visual { 
+                width: 180px; /* Фиксируем размер для телефона */
+                height: auto; 
+                box-shadow: 0 0 40px rgba(224, 215, 215, 0.2);
+                filter: brightness(0.7); /* Чуть темнее, чтобы было таинственно */
+                transition: filter 0.2s, transform 0.1s; 
+            }
+
+            .door-visual:active { filter: brightness(1.0); transform: scale(0.98); }
+
+            .hint-text {
+                margin-top: 20px; color: #aaa; font-size: 14px; font-family: Arial, sans-serif;
+                text-transform: uppercase; letter-spacing: 3px; animation: pulse 2s infinite;
+            }
+            @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+
+            /* Шары (твой код + небольшой фикс отступа) */
+            .ball {
+                position: absolute;
+                width: 70px; 
+                height: auto;
+                top: -10px;
+                z-index: 10;
+                animation: sway 3s infinite alternate ease-in-out; 
+            }
+
+            .ball-left { left: 10px; }
+            .ball-right { right: 10px; }
+
+            @keyframes sway { 
+                0% { transform: rotate(-5deg); } 
+                100% { transform: rotate(5deg); } 
+            }
+
+            /* Карусель: добавил рамку */
+            .carousel-item img {
+                object-fit: cover;    
+                height: 350px; /* Чуть меньше, чтобы влезало на экран телефона */
+                width: 100%;        
+                border-radius: 15px;
+                border: 2px solid #ffc107; /* Золотая рамка */
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            }
+
+            /* НОВОЕ: Стиль для карточки с текстом */
+            .glass-card {
+                background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+                border-radius: 15px;
+                padding: 20px;
+                margin-bottom: 30px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(5px); /* Размытие фона под карточкой */
+            }
+
+            footer {
+                color: rgba(255,255,255,0.4);
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="ball.png" class="ball ball-left">
+        <img src="ball.png" class="ball ball-right">
+
+        <div class="container text-center">
+            
+            <!-- Заголовок -->
+            <h1 class="fw-light">Happy New Year</h1>
+
+            <!-- НОВОЕ: Блок с поздравлением (то, что я предложил добавить) -->
+            <div class="glass-card mx-2">
+                <p class="lead mb-0">Пусть этот год принесет удачу!</p>
+                <small class="text-white-50">Листай фото ниже 👇</small>
+            </div>
+
+            <!-- Карусель -->
+            <div id="myCarousel" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="dog.png" class="d-block w-100" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="elka.png" class="d-block w-100" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="dog.png" class="d-block w-100" alt="">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+   
+        </div> 
+
+        <!-- Дверь (вернул как было) -->
+        <div class="door-container mx-auto">
+            <img src="door.png" class="door-visual" id="door-img" alt="Дверь">
+            <div class="hint-text" id="intro-text">Стукни 3 раза</div>
+        </div>
+        
+        <footer class="footer mt-auto py-3 text-center">
+            <div class="container">
+                <span class="small">Сделано с новогодним настроением</span>
+            </div>
+        </footer>
+
+        <script src="js/bootstrap.bundle.min.js"></script>
+    </b
